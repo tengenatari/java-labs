@@ -5,7 +5,6 @@ import java.util.*;
 
 
 public class Main {
-    public String PATH = "C:\\Users\\Andrey\\IdeaProjects\\java-labs\\src\\students.txt";
     public static String generate_random_string(){
         Random rng = new Random();
         String characters = "qwertyuiopasdfghjklzxcvbnm";
@@ -27,7 +26,6 @@ public class Main {
         }
         return marks;
     }
-
     public static void addGroup(Groups group) throws FileNotFoundException {
         System.out.println("Enter method to add group");
         System.out.println("options: keyboard, random or filename(/users/students.txt)");
@@ -43,7 +41,6 @@ public class Main {
                 "5 - sortAllGroupsUsingInstance\n" +
                 "6 - sortAllGroupsUsingLambda\n" +
                 "9 - exit");
-
     }
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
@@ -61,10 +58,6 @@ public class Main {
                 case 6: groups.sortUsingLambda(); break;
                 default: break;
             }
-
         }
-
-
-
     }
 }
