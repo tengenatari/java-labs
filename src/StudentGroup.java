@@ -10,10 +10,8 @@ public class StudentGroup{
     private ArrayList<Student> students = new ArrayList<>();
     private Comparator<Student> comparator = null;
     public StudentGroup(Object method) throws FileNotFoundException {
-
         this.setGroup_name(method);
-        this.addStudents(method);
-
+        this.addStudents(method, true);
 
     }
     public void setComparator(Comparator<Student> comparator) {
@@ -35,7 +33,7 @@ public class StudentGroup{
             this.group_name = scanner.nextLine();
         }
     }
-    public void addStudents(Object method) throws FileNotFoundException {
+    public void addStudents(Object method, Boolean set_name) throws FileNotFoundException {
         int count = 10;
         if(method instanceof String) {
             if (method.equals("keyboard")) {
@@ -45,9 +43,13 @@ public class StudentGroup{
                 count = scanner.nextInt();
 
 
-            } else {
+            } else if (!method.equals("random")) {
                 File doc = new File((String) method);
                 method = new Scanner(doc);
+                if (set_name) {
+                    this.group_name = ((Scanner) method).nextLine();
+                }
+                count = Integer.parseInt(((Scanner) method).nextLine());
             }
         }
         else{

@@ -1,11 +1,11 @@
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 import java.util.Random;
 import java.util.*;
+
+
 public class Main {
+    public String PATH = "C:\\Users\\Andrey\\IdeaProjects\\java-labs\\src\\students.txt";
     public static String generate_random_string(){
         Random rng = new Random();
         String characters = "qwertyuiopasdfghjklzxcvbnm";
@@ -28,23 +28,38 @@ public class Main {
         return marks;
     }
 
-    public static void addGroup(){
+    public static void addGroup(Groups group) throws FileNotFoundException {
         System.out.println("Enter method to add group");
         System.out.println("options: keyboard, random or filename(/users/students.txt)");
+        Scanner scanner = new Scanner(System.in);
+        group.addGroup(scanner.nextLine());
     }
+    public static void HelloMessage(){
+        System.out.println("Options: \n" +
+                "1 - addGroup\n" +
+                "2 - viewAllStudents\n" +
+                "3 - viewGoodStudents\n" +
+                "4 - sortAllGroups\n" +
+                "5 - sortAllGroupsUsingInstance\n" +
+                "6 - sortAllGroupsUsingLambda\n" +
+                "9 - exit");
 
+    }
     public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         Groups groups = new Groups();
-        String input = "";
-        while(! input.equals("exit")){
-            input = scanner.nextLine();
+        int input = 100;
+        while(input != 9 ){
+            Main.HelloMessage();
+            input = scanner.nextInt();
             switch (input){
-                case "addGroup": Main.addGroup(); groups.addGroup(scanner.nextLine()); break;
-                case "viewAllStudents": groups.printGroups(); break;
-                case "viewGoodStudents": groups.printGoodStudents(); break;
-                case "sortAllGroups": groups.sort(); break;
-
+                case 1: Main.addGroup(groups); break;
+                case 2: groups.printGroups(); break;
+                case 3: groups.printGoodStudents(); break;
+                case 4: groups.defaultSort(); break;
+                case 5: groups.sortUsingInstance();
+                case 6: groups.sortUsingLambda(); break;
+                default: break;
             }
 
         }

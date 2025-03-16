@@ -35,12 +35,13 @@ public class Student implements Comparable<Student> {
         else if (method instanceof Scanner scanner) {
 
             this.name = scanner.nextLine();
+            System.out.println(this.name);
             this.place_of_birth = scanner.nextLine();
-            int count = scanner.nextInt();
+            System.out.println(this.place_of_birth);
+            int count = Integer.parseInt(scanner.nextLine());
 
             for(int i = 0; i < count; i++){
-                Integer[] markss = new Integer[5];
-                this.marks.add(scanner.nextInt());
+                this.marks.add(Integer.parseInt(scanner.nextLine()));
             }
         }
     }
