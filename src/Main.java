@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -26,9 +27,29 @@ public class Main {
         }
         return marks;
     }
-    public static void main(String[] args) {
-        while(true){
-            
+
+    public static void addGroup(){
+        System.out.println("Enter method to add group");
+        System.out.println("options: keyboard, random or filename(/users/students.txt)");
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        Scanner scanner = new Scanner(System.in);
+        Groups groups = new Groups();
+        String input = "";
+        while(! input.equals("exit")){
+            input = scanner.nextLine();
+            switch (input){
+                case "addGroup": Main.addGroup(); groups.addGroup(scanner.nextLine()); break;
+                case "viewAllStudents": groups.printGroups(); break;
+                case "viewGoodStudents": groups.printGoodStudents(); break;
+                case "sortAllGroups": groups.sort(); break;
+
+            }
+
         }
+
+
+
     }
 }

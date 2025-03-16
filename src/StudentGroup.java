@@ -2,23 +2,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
 
-import static javax.management.Query.or;
 
 public class StudentGroup{
     private String group_name;
     private ArrayList<Student> students = new ArrayList<>();
     private Comparator<Student> comparator = null;
-    private StudentGroup(String name, Object... students){
-        this.group_name = name;
+    public StudentGroup(Object method) throws FileNotFoundException {
 
-        for(Object student: students){
-            if(student instanceof Student)
-                this.students.add((Student) student);
-            else throw new IllegalArgumentException("...");
-        }
+        this.setGroup_name(method);
+        this.addStudents(method);
 
 
     }
@@ -26,6 +20,21 @@ public class StudentGroup{
         this.comparator = comparator;
     }
 
+    public void setGroup_name(Object method) throws FileNotFoundException {
+        if(method.equals("keyboard")){
+            System.out.println("Input group name\n");
+            Scanner scanner = new Scanner(System.in);
+
+            this.group_name = scanner.nextLine();
+
+        }
+        else if(method.equals("random")){
+            this.group_name = Main.generate_random_string();
+        }
+        else if(method instanceof Scanner scanner){
+            this.group_name = scanner.nextLine();
+        }
+    }
     public void addStudents(Object method) throws FileNotFoundException {
         int count = 10;
         if(method instanceof String) {
@@ -34,7 +43,7 @@ public class StudentGroup{
 
                 System.out.println("Input num of students to add");
                 count = scanner.nextInt();
-                scanner.close();
+
 
             } else {
                 File doc = new File((String) method);
@@ -49,11 +58,6 @@ public class StudentGroup{
             Student student = new Student(method);
             students.add(student);
         }
-
-        if( method instanceof Scanner scanner){
-            scanner.close();
-        }
-
     }
 
     public void sort(){
@@ -65,5 +69,20 @@ public class StudentGroup{
         return String.format("%s %d\n", this.group_name, this.students.size());
     }
 
+    public void printStudents(){
+        System.out.printf("Group name: %s", this);
+        System.out.println("Students: ");
+        for (Student student : students){
+            System.out.println(student);
+        }
+    }
+    public void printGoodStudents(){
+        System.out.printf("Group name: %s", this);
+        for (Student student : students){
+            if(student.is_only_good_marks()){
+                System.out.println(student);
+            }
+        }
+    }
 }
 

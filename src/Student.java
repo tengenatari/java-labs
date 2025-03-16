@@ -9,7 +9,7 @@ public class Student implements Comparable<Student> {
     public Student(Object method){
         if(method.equals("keyboard")){
 
-            System.out.println("Input student name\n");
+            System.out.println("Input student name");
             Scanner scanner = new Scanner(System.in);
 
             this.name = scanner.nextLine();
@@ -20,12 +20,12 @@ public class Student implements Comparable<Student> {
 
             int count = scanner.nextInt();
 
-
+            System.out.printf("Input %d marks\n\n", count);
             for(int i = 0; i < count; i++){
 
                 this.marks.add(scanner.nextInt());
             }
-            scanner.close();
+
         }
         else if(method.equals("random")){
             this.name = Main.generate_random_string();
@@ -39,7 +39,7 @@ public class Student implements Comparable<Student> {
             int count = scanner.nextInt();
 
             for(int i = 0; i < count; i++){
-
+                Integer[] markss = new Integer[5];
                 this.marks.add(scanner.nextInt());
             }
         }
@@ -65,6 +65,6 @@ public class Student implements Comparable<Student> {
     }
     @Override
     public String toString(){
-        return String.format("%s %f\n", this.name, this.get_average());
+        return String.format("%s %f", this.name, this.get_average());
     }
 }
