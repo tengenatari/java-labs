@@ -5,7 +5,7 @@ public abstract class TransportVehicle {
     protected Integer current_weight = 0;
 
 
-    public abstract void move();
+    public abstract void move(int hours);
 
     public boolean can_load_or_unload_transport(int weight){
         int potential_weight = weight+this.current_weight;
