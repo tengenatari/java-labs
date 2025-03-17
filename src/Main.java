@@ -2,6 +2,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.*;
+import java.util.stream.Stream;
 
 
 public class Main {
@@ -42,22 +43,99 @@ public class Main {
                 "6 - sortAllGroupsUsingLambda\n" +
                 "9 - exit");
     }
+    public static void print_using_iter(Iterator<Object> iterator){
+        while (iterator.hasNext())
+            System.out.println(iterator.next());
+    };
     public static void main(String[] args) throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        Groups groups = new Groups();
-        int input = 100;
-        while(input != 9 ){
-            Main.HelloMessage();
-            input = scanner.nextInt();
-            switch (input){
-                case 1: Main.addGroup(groups); break;
-                case 2: groups.printGroups(); break;
-                case 3: groups.printGoodStudents(); break;
-                case 4: groups.defaultSort(); break;
-                case 5: groups.sortUsingInstance();
-                case 6: groups.sortUsingLambda(); break;
-                default: break;
-            }
-        }
+        StudentGroup group = new StudentGroup("random");
+        group.printStudents();
+        Stream<Student> stream = group.getStudents().stream();
+
+        System.out.println("After stream");
+        System.out.println("1 task");
+
+        stream = group.getStudents().stream();
+        var iterator_task_1 = stream
+                .filter(e -> e.get_average() > 3.0)
+                .iterator();
+        while (iterator_task_1.hasNext())
+            System.out.println(iterator_task_1.next());
+
+
+        System.out.println("2 task");
+
+        stream = group.getStudents().stream();
+        var iterator_task_2 = stream.
+                map(Student::get_average)
+                .iterator();
+
+        while (iterator_task_2.hasNext())
+            System.out.println(iterator_task_2.next());
+
+
+        System.out.println("3 task");
+
+        stream = group.getStudents().stream();
+
+        var iterator_task_3 = stream.
+                peek(e -> {e.setName("Andrey Zhilin");})
+                .iterator();
+        while (iterator_task_3.hasNext())
+            System.out.println(iterator_task_3.next());
+
+        System.out.println("Task 4");
+
+        stream = group.getStudents().stream();
+        int n = 5;
+        var iterator_task_4 = stream
+                .limit(n)
+                .iterator();
+
+        while (iterator_task_4.hasNext())
+            System.out.println(iterator_task_4.next());
+
+        System.out.println("Task 5");
+
+        stream = group.getStudents().stream();
+        int length = group.getStudents().size();
+        var iterator_task_5 = stream
+                .skip(Math.max(0, length - n))
+                .iterator();
+
+        while (iterator_task_5.hasNext())
+            System.out.println(iterator_task_5.next());
+
+        System.out.println("task 6");
+
+        stream = group.getStudents().stream();
+        var array = stream.toArray();
+
+        System.out.println(Arrays.toString(array));
+
+        System.out.println("task 7 ");
+
+        stream = group.getStudents().stream();
+
+        var iterator_task_7 = stream
+                .min((a, b) -> a.get_average().compareTo(b.get_average()));
+        System.out.println(iterator_task_7);
+
+        System.out.println("task 8");
+        stream = group.getStudents().stream();
+        var iterator_task_8 = stream.anyMatch(Student::is_only_good_marks);
+        System.out.println(iterator_task_8);
+
+        System.out.println("task 9 ");
+        stream = group.getStudents().stream();
+        var iterator_task_9 = stream.allMatch(e -> e.get_average() > 2.5);
+
+        System.out.println(iterator_task_9);
+
+
+
+
+
+
     }
 }

@@ -85,6 +85,11 @@ public class StudentGroup{
                 System.out.println(student);
             }
         }
+
+    }
+    public ArrayList<Student> getStudents(){
+        return this.students;
+
     }
 }
 

@@ -46,6 +46,10 @@ public class Student implements Comparable<Student> {
         }
     }
 
+    public void setName(String place_of_birth) {
+        this.name = place_of_birth;
+    }
+
     public Double get_average(){
         double average = 0;
         int n = this.marks.size();
